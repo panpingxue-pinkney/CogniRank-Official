@@ -1,0 +1,33 @@
+# General Ignore Files
+.DS_Store
+.env
+.ipynb_checkpoints/
+__pycache__/
+
+# Python Compiled Files
+*.pyc
+*.pyo
+*.pyd
+
+# Testing and Coverage
+.coverage
+htmlcov/
+
+# Virtual Environment
+# The virtual environment folder should not be committed to the repository.
+# Common names: venv, env, .venv
+venv/
+env/
+
+# IDE and Editor Files
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Jupyter Notebooks Data (if you plan to use them)
+*.ipynb
+
+# Log Files
+*.log

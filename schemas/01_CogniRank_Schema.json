@@ -1,0 +1,258 @@
+{
+  "schema_name": "CogniRank_Cognitive_Matrix_Schema_V1.0",
+  "version": "1.0",
+  "description": "Defines the structure and specifications of the six-layer and twenty cognitive dimensions (Sets) of the CogniRank project, serving as an authoritative reference for API and database design.",
+  "common_fields_structure": {
+    "set_id": "String (Unique ID, Z-R). Unique ID for the Set, ranging from Z to R.",
+    "layer": "String (The layer the Set belongs to).",
+    "core_prompt": "String (The key prompt used to guide thinking or AI generation).",
+    "expected_output_format": "String (The expected output type, such as List_of_Objects or Graph_Structure).",
+    "output_fields": "Array_of_Objects (Defines the structure of the final output).",
+    "default_weight": "Number (Default weight w_i, ranging from 0.0 to 1.0)."
+  },
+  "sets": [
+    // ----------------------------------------------------
+    // Layer 0: Intent Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "Z",
+      "layer": "Intent",
+      "core_prompt": "What is the ultimate purpose of this thinking exercise? What is a measurable outcome?",
+      "expected_output_format": "List_of_Objectives",
+      "output_fields": [
+        {"field_name": "target_outcome", "type": "String", "description": "Specific result expected to be achieved."},
+        {"field_name": "success_metric", "type": "String", "description": "Quantitative metric for measuring success."}
+      ],
+      "default_weight": 0.9
+    },
+    {
+      "set_id": "Y",
+      "layer": "Intent",
+      "core_prompt": "What tools and data do I currently have? How much time am I willing to invest to reach what granularity?",
+      "expected_output_format": "Resource_Constraints",
+      "output_fields": [
+        {"field_name": "time_budget_hours", "type": "Number", "description": "Time budget (in hours)."},
+        {"field_name": "available_data_sources", "type": "List_of_Strings", "description": "Available data or information sources."}
+      ],
+      "default_weight": 0.3
+    },
+    // ----------------------------------------------------
+    // Layer 1: Framing Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "A",
+      "layer": "Framing",
+      "core_prompt": "What have I taken for granted? What if the opposite were true?",
+      "expected_output_format": "List_of_Assumptions",
+      "output_fields": [
+        {"field_name": "implicit_belief", "type": "String", "description": "Identified implicit belief."},
+        {"field_name": "criticality_score", "type": "Number", "description": "Criticality score of the assumption to the conclusion (1-5)."}
+      ],
+      "default_weight": 0.75
+    },
+    {
+      "set_id": "B",
+      "layer": "Framing",
+      "core_prompt": "What dimensions have I limited? To what system level can it be extended?",
+      "expected_output_format": "List_of_Boundaries",
+      "output_fields": [
+        {"field_name": "current_boundary", "type": "String", "description": "Current limiting dimension."},
+        {"field_name": "boundary_type", "type": "String", "description": "Type of constraint (Spatial/Temporal/System)."}
+      ],
+      "default_weight": 0.6
+    },
+    {
+      "set_id": "C",
+      "layer": "Framing",
+      "core_prompt": "In what system, cultural, or time context does this issue exist?",
+      "expected_output_format": "Contextual_Summary",
+      "output_fields": [
+        {"field_name": "system_environment", "type": "String", "description": "The encompassing system or ecology."},
+        {"field_name": "historical_relevance", "type": "String", "description": "Historical or temporal context."}
+      ],
+      "default_weight": 0.4
+    },
+    // ----------------------------------------------------
+    // Layer 2: Complexity Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "D",
+      "layer": "Complexity",
+      "core_prompt": "What exactly does this term mean? Does its meaning change across different domains?",
+      "expected_output_format": "Concept_Definitions",
+      "output_fields": [
+        {"field_name": "ambiguous_term", "type": "String", "description": "Identified ambiguous concept."},
+        {"field_name": "clarified_definition", "type": "String", "description": "The clarified definition."}
+      ],
+      "default_weight": 0.8
+    },
+    {
+      "set_id": "E",
+      "layer": "Complexity",
+      "core_prompt": "Which concepts, domains, or variables are mutually coupled?",
+      "expected_output_format": "Graph_Structure",
+      "output_fields": [
+        {"field_name": "node_A", "type": "String", "description": "Related concept A."},
+        {"field_name": "node_B", "type": "String", "description": "Related concept B."},
+        {"field_name": "relationship_type", "type": "String", "description": "Type of relationship (Coupling/Exclusive/Causal)."}
+      ],
+      "default_weight": 0.65
+    },
+    {
+      "set_id": "F",
+      "layer": "Complexity",
+      "core_prompt": "How would this look from the perspective of physics, psychology, sociology, or systems theory?",
+      "expected_output_format": "Cross_Discipline_Mapping",
+      "output_fields": [
+        {"field_name": "discipline", "type": "String", "description": "Discipline (e.g., Physics/Psychology)."},
+        {"field_name": "analogous_concept", "type": "String", "description": "Analogous concept in that discipline."}
+      ],
+      "default_weight": 0.5
+    },
+    // ----------------------------------------------------
+    // Layer 3: Dynamic Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "G",
+      "layer": "Dynamic",
+      "core_prompt": "What are the core variables that truly drive the result?",
+      "expected_output_format": "Causal_Chain_List",
+      "output_fields": [
+        {"field_name": "core_variable", "type": "String", "description": "Core driving variable."},
+        {"field_name": "impact_direction", "type": "String", "description": "Direction of impact (Positive/Negative)."},
+        {"field_name": "evidence_level", "type": "Number", "description": "Strength of evidence support (1-5)."}
+      ],
+      "default_weight": 0.95
+    },
+    {
+      "set_id": "H",
+      "layer": "Dynamic",
+      "core_prompt": "Which parts are self-accelerating? Which parts are balancing?",
+      "expected_output_format": "Feedback_Loop_Structure",
+      "output_fields": [
+        {"field_name": "loop_name", "type": "String", "description": "Loop name (e.g., Matthew Effect)."},
+        {"field_name": "loop_type", "type": "String", "description": "Loop type (Reinforcing R/Balancing B)."}
+      ],
+      "default_weight": 0.7
+    },
+    {
+      "set_id": "I",
+      "layer": "Dynamic",
+      "core_prompt": "Short-term vs. long-term, how does the process evolve?",
+      "expected_output_format": "Time_Evolution_Points",
+      "output_fields": [
+        {"field_name": "time_horizon", "type": "String", "description": "Time scope (Short/Mid/Long-term)."},
+        {"field_name": "key_change_point", "type": "String", "description": "Key inflection point or delay effect."}
+      ],
+      "default_weight": 0.45
+    },
+    // ----------------------------------------------------
+    // Layer 4: Insight Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "J",
+      "layer": "Insight",
+      "core_prompt": "Changing the perspective, is this question still valid?",
+      "expected_output_format": "Perspective_Shifts",
+      "output_fields": [
+        {"field_name": "new_perspective_role", "type": "String", "description": "The role or scale switched to."},
+        {"field_name": "finding_from_shift", "type": "String", "description": "New insight discovered after shifting perspective."}
+      ],
+      "default_weight": 0.75
+    },
+    {
+      "set_id": "K",
+      "layer": "Insight",
+      "core_prompt": "Which completely different domain has a similar structure?",
+      "expected_output_format": "Analogy_Mapping",
+      "output_fields": [
+        {"field_name": "source_domain", "type": "String", "description": "Source domain."},
+        {"field_name": "structural_similarity", "type": "String", "description": "Description of the structural similarity."}
+      ],
+      "default_weight": 0.6
+    },
+    {
+      "set_id": "L",
+      "layer": "Insight",
+      "core_prompt": "What is the value of solving this problem for the system or humanity?",
+      "expected_output_format": "Value_Proposition",
+      "output_fields": [
+        {"field_name": "stakeholder", "type": "String", "description": "Beneficiary (e.g., Individual/Society/Company)."},
+        {"field_name": "positive_impact", "type": "String", "description": "Positive value brought by solving the problem."}
+      ],
+      "default_weight": 0.8
+    },
+    // ----------------------------------------------------
+    // Layer 5: Representation Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "M",
+      "layer": "Representation",
+      "core_prompt": "Can the insight be formalized into a structured model?",
+      "expected_output_format": "Model_Formalization",
+      "output_fields": [
+        {"field_name": "model_type", "type": "String", "description": "Model type (e.g., Math Formula/Narrative Model/Flowchart)."},
+        {"field_name": "model_summary", "type": "String", "description": "Core elements or formula of the model."}
+      ],
+      "default_weight": 0.5
+    },
+    {
+      "set_id": "N",
+      "layer": "Representation",
+      "core_prompt": "Can it be explained immediately with one visual?",
+      "expected_output_format": "Visualization_Suggestion",
+      "output_fields": [
+        {"field_name": "chart_type", "type": "String", "description": "Suggested chart type (e.g., Sankey/Causal Loop)."},
+        {"field_name": "data_source_set", "type": "String", "description": "Data source Set ID (e.g., G, E)."}
+      ],
+      "default_weight": 0.4
+    },
+    {
+      "set_id": "O",
+      "layer": "Representation",
+      "core_prompt": "How can people of different cognitive levels understand it?",
+      "expected_output_format": "Communication_Strategy",
+      "output_fields": [
+        {"field_name": "target_audience", "type": "String", "description": "Target audience (e.g., Expert/General Public/Manager)."},
+        {"field_name": "key_takeaway_message", "type": "String", "description": "Core message designed for that audience."}
+      ],
+      "default_weight": 0.55
+    },
+    // ----------------------------------------------------
+    // Layer 6: Meta Layer
+    // ----------------------------------------------------
+    {
+      "set_id": "P",
+      "layer": "Meta",
+      "core_prompt": "Did I oversimplify? Did I ignore a certain type of explanation?",
+      "expected_output_format": "Meta_Cognition_Feedback",
+      "output_fields": [
+        {"field_name": "blind_spot_identified", "type": "String", "description": "Identified blind spot or unexplored explanation."},
+        {"field_name": "simplification_risk", "type": "String", "description": "Potential risk of oversimplification."}
+      ],
+      "default_weight": 0.8
+    },
+    {
+      "set_id": "Q",
+      "layer": "Meta",
+      "core_prompt": "Was the view limited by anchoring or confirmation bias?",
+      "expected_output_format": "Bias_Mitigation_Plan",
+      "output_fields": [
+        {"field_name": "potential_bias_type", "type": "String", "description": "Type of cognitive bias likely present."},
+        {"field_name": "mitigation_action", "type": "String", "description": "Concrete action to mitigate the bias."}
+      ],
+      "default_weight": 0.7
+    },
+    {
+      "set_id": "R",
+      "layer": "Meta",
+      "core_prompt": "Did my cognitive model update after each thought process?",
+      "expected_output_format": "Model_Update_Log",
+      "output_fields": [
+        {"field_name": "concept_updated", "type": "String", "description": "Key concept or Set that was updated."},
+        {"field_name": "model_evolution_description", "type": "String", "description": "Description of the cognitive model's evolution."}
+      ],
+      "default_weight": 0.6
+    }
+  ]
+}

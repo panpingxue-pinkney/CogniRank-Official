@@ -1,0 +1,80 @@
+{
+  "schema_name": "CogniRank_Final_Report_Output_V1.0",
+  "version": "1.0",
+  "description": "Defines the core data structure for the final report in the CogniRank API response (the final_report_data field). This structure aggregates the output of all 20 Sets, used for frontend rendering and backend data validation.",
+  
+  "properties": {
+    "report_metadata": {
+      "type": "object",
+      "description": "Report metadata, including task ID, timestamp, and the original question.",
+      "properties": {
+        "task_id": {"type": "string"},
+        "analysis_date": {"type": "string", "format": "date-time"},
+        "original_question": {"type": "string"},
+        "overall_cognirank_score_I": {"type": "number", "minimum": 1.0, "maximum": 5.0}
+      },
+      "required": ["task_id", "analysis_date", "overall_cognirank_score_I"]
+    },
+    
+    "layer_summary_scores": {
+      "type": "object",
+      "description": "Weighted quality scores summarized by the hierarchical Layer structure.",
+      "properties": {
+        "Layer_0_Intent": {"type": "number"},
+        "Layer_1_Framing": {"type": "number"},
+        "Layer_2_Complexity": {"type": "number"},
+        "Layer_3_Dynamic": {"type": "number"},
+        "Layer_4_Insight": {"type": "number"},
+        "Layer_5_Representation": {"type": "number"},
+        "Layer_6_Meta": {"type": "number"}
+      },
+      "required": ["Layer_0_Intent", "Layer_1_Framing", "Layer_6_Meta"]
+    },
+    
+    "set_outputs": {
+      "type": "object",
+      "description": "Container for the detailed output data of all 20 Sets. Each key corresponds to a Set ID (Z to R).",
+      "properties": {
+        "Z": {
+          "type": "object",
+          "description": "Output for the Objective Set (Z). Structure must follow the Z Set definition in 01_CogniRank_Schema.json.",
+          "properties": {
+            "set_name": {"type": "string", "description": "The human-readable name of the Set."}, 
+            "quality_score": {"type": "number"},
+            "output_data": {"type": "array", "description": "The actual content data defined by 01_CogniRank_Schema."} 
+          }
+        },
+        "Y": {
+          "type": "object",
+          "description": "Output for the Resource Constraint Set (Y).",
+          "properties": {
+            "set_name": {"type": "string", "description": "The human-readable name of the Set."}, 
+            "quality_score": {"type": "number"},
+            "output_data": {"type": "array"}
+          }
+        },
+
+        "R": {
+          "type": "object",
+          "description": "Output for the Learning Dynamics Set (R).",
+          "properties": {
+            "set_name": {"type": "string", "description": "The human-readable name of the Set."},  
+            "quality_score": {"type": "number"},
+            "output_data": {"type": "array"}
+          }
+        }
+      },
+      "required": ["Z", "Y", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R"]
+    },
+    
+    "visualization_data_sources": {
+      "type": "object",
+      "description": "Structured data sources used for frontend visualization (N) rendering.",
+      "properties": {
+        "radar_chart_data": {"type": "array", "description": "Set score data formatted for the radar chart visualization."}, 
+        "causal_loop_data": {"type": "array", "description": "H Set and G Set data formatted for the causal loop diagram visualization."} 
+      }
+    }
+  },
+  "required": ["report_metadata", "layer_summary_scores", "set_outputs"]
+}
