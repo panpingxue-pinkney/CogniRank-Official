@@ -73,3 +73,6 @@ The CogniRank framework is grounded in research concerning structured reasoning 
 
 * **Cognitive Depth Metric in Human-AI Collaborative Reasoning** (Zenodo Link: [(https://doi.org/10.5281/zenodo.17505317)])
 * **Proof of Thought (PoT)** (Zenodo Link: [(https://zenodo.org/records/17505798)])
+
+
+2026 Milestone: Published the Destiny Structure Theorems (Joint AI Review Edition) in collaboration with the Silicon Council, formalizing the structural dynamics of cognitive physics. (See /docs for details).
